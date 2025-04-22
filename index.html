@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md. Sabbir Hossain - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-light: #3498db;
+            --primary-dark: #2ecc71;
+            --bg-light: #f8f9fa;
+            --text-light: #2c3e50;
+            --bg-dark: #1a1a1a;
+            --text-dark: #ecf0f1;
+            --accent: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .theme-toggle {
+            background: var(--primary-dark);
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            color: white;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info i {
+            font-size: 1.2rem;
+        }
+
+        .btn-download {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary-light);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        body.dark-mode .btn-download {
+            background-color: var(--text-dark);
+            color: var(--primary-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .section {
+            background: rgba(30,30,30,0.9);
+        }
+
+        h2 {
+            color: var(--primary-light);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        body.dark-mode h2 {
+            color: var(--primary-dark);
+            border-bottom-color: var(--primary-dark);
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .education-item {
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-light);
+            background: rgba(240,240,240,0.7);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.dark-mode .education-item {
+            background: rgba(40,40,40,0.7);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: var(--primary-light);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        body.dark-mode .skill-tag {
+            background: var(--primary-dark);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: inherit;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--primary-light);
+            color: white;
+            margin-top: 4rem;
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        body.dark-mode footer {
+            background: var(--primary-dark);
+        }
+
+        .copyright {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated {
+            animation: fadeIn 0.8s forwards;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+
+    <header>
+        <img src="IMG_20220607_114002.jpg" alt="Profile Picture" class="profile-img">
+        <h1>Md. Sabbir Hossain</h1>
+        <div class="contact-info">
+            <i class="fas fa-envelope"></i>
+            <p>md.sabbirofficial05@gmail.com</p>
+        </div>
+        <div class="contact-info">
+            <i class="fas fa-phone"></i>
+            <p>01533391864</p>
+        </div>
+        <a href="#" class="btn-download">Download CV</a>
+        <div class="social-links">
+            <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section animated" id="objective">
+            <h2>Career Objective</h2>
+            <p>To enter into a well-reputed organization in a situation or position with the intention to work honestly, face the challenges of the time, and gain experiences and skills for a successful career, especially in research and knowledge-based areas.</p>
+        </section>
+
+        <section class="section animated" id="education">
+            <h2>Education</h2>
+            <div class="education-grid">
+                <div class="education-item">
+                    <h3>B.SE. in CSE</h3>
+                    <p>Dhaka International University</p>
+                    <p>Status: <em>Running</em> (2022 - Present)</p>
+                </div>
+                <div class="education-item">
+                    <h3>HSC (Science)</h3>
+                    <p>St. Gregory's High School & College</p>
+                    <p>CGPA: 4.92/5 | 2020</p>
+                </div>
+                <div class="education-item">
+                    <h3>SSC (Science)</h3>
+                    <p>Motijheel Model School & College</p>
+                    <p>CGPA: 4.94/5 | 2018</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section animated" id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills">
+                <span class="skill-tag">C++</span>
+                <span class="skill-tag">C</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">Microsoft Office</span>
+                <span class="skill-tag">HTML/CSS</span>
+                <span class="skill-tag">JavaScript</span>
+            </div>
+        </section>
+
+        <section class="section animated" id="sports">
+            <h2>Favorite Sports</h2>
+            <ul>
+                <li>Football - The beautiful game that brings people together</li>
+                <li>Badminton - Fast-paced racket sport requiring agility and precision</li>
+                <li>Rugby - Physical team sport with intense strategy and teamwork</li>
+            </ul>
+        </section>
+
+        <section class="section animated" id="hobbies">
+            <h2>Travel Adventures</h2>
+            <ul>
+                <li>Mountain Trekking - Exploring high altitudes and challenging trails</li>
+                <li>Historical Exploration - Discovering ancient architectures and cultures</li>
+                <li>Coastal Journeys - Relaxing by the sea and exploring marine life</li>
+            </ul>
+        </section>
+
+        <section class="section animated" id="certificates">
+            <h2>Certifications</h2>
+            <ul>
+                <li>40 hours English Learning and Speaking - Cambridge Academy of Bangladesh (2020)</li>
+            </ul>
+        </section>
+
+        <section class="section animated" id="strengths">
+            <h2>Personal Strengths</h2>
+            <ul>
+                <li>Fast learning and good presentation skills</li>
+                <li>Excellent team communication</li>
+                <li>Passion for learning new technologies</li>
+                <li>Strong work ethic and organizational skills</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <div class="copyright">
+            <i class="far fa-copyright"></i>
+            <p>Made by Sabbir</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const themeBtn = document.querySelector('.theme-toggle');
+            themeBtn.innerHTML = document.body.classList.contains('dark-mode') ? 
+                '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            
+            // Save theme preference
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+
+        // Check saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.querySelector('.theme-toggle').innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach((section) => {
+            observer.observe(section);
+        });
+
+        // CV download functionality
+        document.querySelector('.btn-download').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('CV download functionality will be added here');
+            // In actual implementation, you would link to your CV file:
+            // window.location.href = 'path/to/your-cv.pdf';
+        });
+    </script>
+</body>
+</html>
